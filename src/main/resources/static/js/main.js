@@ -17,9 +17,11 @@ var colors = [
 ];
 
 function connect(event) {
+    //get the name without left and right spaces/enters
     username = document.querySelector('#name').value.trim();
 
     if(username) {
+        //change the classname to switch the pages
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -82,20 +84,20 @@ function onMessageReceived(payload) {
         message.content = message.sender + ' left!';
     } else {
         messageElement.classList.add('chat-message');
-
+        //This will be divided into three parts, find the avatar color
         var avatarElement = document.createElement('i');
         var avatarText = document.createTextNode(message.sender[0]);
         avatarElement.appendChild(avatarText);
         avatarElement.style['background-color'] = getAvatarColor(message.sender);
-
         messageElement.appendChild(avatarElement);
 
+        //Step2, find the username
         var usernameElement = document.createElement('span');
         var usernameText = document.createTextNode(message.sender);
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
     }
-
+    //most important step, output the msg to everyone.
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(message.content);
     textElement.appendChild(messageText);
